@@ -7,6 +7,26 @@ function KanaBoard (props) {
         <div>
             <h1>Hello World!</h1>
             <p>{props.message}</p>
+            <KanaRow />
+        </div>
+    );
+}
+
+function KanaRow (props) {
+    return (
+        <Kana character="つ" pronunciation="tsu"/>
+    )
+}
+
+function Kana (props) {
+    return (
+        <div>
+            <div>
+                {props.character}
+            </div>
+            <div>
+                {props.pronunciation}
+            </div>
         </div>
     );
 }
