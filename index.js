@@ -47,6 +47,24 @@ const KANA = [
     {hira: 'て', kata: 'テ', eng: 'te'},
     {hira: 'と', kata: 'ト', eng: 'to'},
 
+    {hira: 'な', kata: 'ナ', eng: 'na'},
+    {hira: 'に', kata: 'ニ', eng: 'ni'},
+    {hira: 'ぬ', kata: 'ヌ', eng: 'nu'},
+    {hira: 'ね', kata: 'ネ', eng: 'ne'},
+    {hira: 'の', kata: 'ノ', eng: 'no'},
+
+    {hira: 'は', kata: 'ハ', eng: 'ha'},
+    {hira: 'ひ', kata: 'ヒ', eng: 'hi'},
+    {hira: 'ふ', kata: 'フ', eng: 'hu'},
+    {hira: 'へ', kata: 'ヘ', eng: 'he'},
+    {hira: 'ほ', kata: 'ホ', eng: 'ho'},
+    
+    {hira: 'ま', kata: 'マ', eng: 'ma'},
+    {hira: 'み', kata: 'ミ', eng: 'mi'},
+    {hira: 'む', kata: 'ム', eng: 'mu'},
+    {hira: 'め', kata: 'メ', eng: 'me'},
+    {hira: 'も', kata: 'モ', eng: 'mo'}, 
+  
     //TODO Complete array
   ];
 
