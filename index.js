@@ -3,74 +3,94 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 function KanaBoard (props) {
-    let kana = props.kanaSet.map((k, i) => { 
+    let kanaTable = props.kanaSet.map((row, i) => { 
         return (
-          <Kana key={i}
-            hira={k.hira}
-            kata={k.kata}
-            pronunciation={k.eng}
-            className="kana"
-          />
+            <KanaRow key={i}
+                kanaRow={row}
+                className="kanaRow"
+            />
         );
-      });
+    });
 
     return (
-        <div>
+        <div className={props.className}>
             <h1>{props.message}</h1>
-            {kana}
+            {kanaTable}
         </div>
     );
 }
 
 const KANA = [
-    {hira: 'あ', kata: 'ア', eng: 'a'},
-    {hira: 'い', kata: 'イ', eng: 'i'},
-    {hira: 'う', kata: 'ウ', eng: 'u'},
-    {hira: 'え', kata: 'エ', eng: 'e'},
-    {hira: 'お', kata: 'オ', eng: 'o'},
-
-    {hira: 'か', kata: 'カ', eng: 'ka'},
-    {hira: 'き', kata: 'キ', eng: 'ki'},
-    {hira: 'く', kata: 'ク', eng: 'ku'},
-    {hira: 'け', kata: 'ケ', eng: 'ke'},
-    {hira: 'こ', kata: 'コ', eng: 'ko'},
-    
-    {hira: 'さ', kata: 'サ', eng: 'sa'},
-    {hira: 'し', kata: 'シ', eng: 'shi'},
-    {hira: 'す', kata: 'ス', eng: 'su'},
-    {hira: 'せ', kata: 'セ', eng: 'se'},
-    {hira: 'そ', kata: 'ソ', eng: 'so'},
-
-    {hira: 'た', kata: 'タ', eng: 'ta'},
-    {hira: 'ち', kata: 'チ', eng: 'chi'},
-    {hira: 'つ', kata: 'ツ', eng: 'tsu'},
-    {hira: 'て', kata: 'テ', eng: 'te'},
-    {hira: 'と', kata: 'ト', eng: 'to'},
-
-    {hira: 'な', kata: 'ナ', eng: 'na'},
-    {hira: 'に', kata: 'ニ', eng: 'ni'},
-    {hira: 'ぬ', kata: 'ヌ', eng: 'nu'},
-    {hira: 'ね', kata: 'ネ', eng: 'ne'},
-    {hira: 'の', kata: 'ノ', eng: 'no'},
-
-    {hira: 'は', kata: 'ハ', eng: 'ha'},
-    {hira: 'ひ', kata: 'ヒ', eng: 'hi'},
-    {hira: 'ふ', kata: 'フ', eng: 'hu'},
-    {hira: 'へ', kata: 'ヘ', eng: 'he'},
-    {hira: 'ほ', kata: 'ホ', eng: 'ho'},
-    
-    {hira: 'ま', kata: 'マ', eng: 'ma'},
-    {hira: 'み', kata: 'ミ', eng: 'mi'},
-    {hira: 'む', kata: 'ム', eng: 'mu'},
-    {hira: 'め', kata: 'メ', eng: 'me'},
-    {hira: 'も', kata: 'モ', eng: 'mo'}, 
-  
+    [
+        {hira: 'あ', kata: 'ア', eng: 'a'},
+        {hira: 'い', kata: 'イ', eng: 'i'},
+        {hira: 'う', kata: 'ウ', eng: 'u'},
+        {hira: 'え', kata: 'エ', eng: 'e'},
+        {hira: 'お', kata: 'オ', eng: 'o'},
+    ],
+    [
+        {hira: 'か', kata: 'カ', eng: 'ka'},
+        {hira: 'き', kata: 'キ', eng: 'ki'},
+        {hira: 'く', kata: 'ク', eng: 'ku'},
+        {hira: 'け', kata: 'ケ', eng: 'ke'},
+        {hira: 'こ', kata: 'コ', eng: 'ko'},
+    ],
+    [
+        {hira: 'さ', kata: 'サ', eng: 'sa'},
+        {hira: 'し', kata: 'シ', eng: 'shi'},
+        {hira: 'す', kata: 'ス', eng: 'su'},
+        {hira: 'せ', kata: 'セ', eng: 'se'},
+        {hira: 'そ', kata: 'ソ', eng: 'so'},
+    ],
+    [
+        {hira: 'た', kata: 'タ', eng: 'ta'},
+        {hira: 'ち', kata: 'チ', eng: 'chi'},
+        {hira: 'つ', kata: 'ツ', eng: 'tsu'},
+        {hira: 'て', kata: 'テ', eng: 'te'},
+        {hira: 'と', kata: 'ト', eng: 'to'},
+    ],
+    [
+        {hira: 'な', kata: 'ナ', eng: 'na'},
+        {hira: 'に', kata: 'ニ', eng: 'ni'},
+        {hira: 'ぬ', kata: 'ヌ', eng: 'nu'},
+        {hira: 'ね', kata: 'ネ', eng: 'ne'},
+        {hira: 'の', kata: 'ノ', eng: 'no'},
+    ],
+    [
+        {hira: 'は', kata: 'ハ', eng: 'ha'},
+        {hira: 'ひ', kata: 'ヒ', eng: 'hi'},
+        {hira: 'ふ', kata: 'フ', eng: 'hu'},
+        {hira: 'へ', kata: 'ヘ', eng: 'he'},
+        {hira: 'ほ', kata: 'ホ', eng: 'ho'},
+    ],
+    [ 
+        {hira: 'ま', kata: 'マ', eng: 'ma'},
+        {hira: 'み', kata: 'ミ', eng: 'mi'},
+        {hira: 'む', kata: 'ム', eng: 'mu'},
+        {hira: 'め', kata: 'メ', eng: 'me'},
+        {hira: 'も', kata: 'モ', eng: 'mo'}, 
+    ],
     //TODO Complete array
   ];
 
-// function KanaRow(props) {
-//     // TODO Group kana together
-// }
+function KanaRow(props) {
+    let kana = props.kanaRow.map((k, i) => { 
+        return (
+            <Kana key={i}
+              hira={k.hira}
+              kata={k.kata}
+              pronunciation={k.eng}
+              className="kana"
+            />
+        );
+    });
+
+    return (
+        <div className={props.className}>
+            {kana}
+        </div>
+    );
+}
 
 function Kana (props) {
     return (
@@ -89,7 +109,7 @@ function Kana (props) {
 }
 
 ReactDOM.render(
-    <KanaBoard message="Japanese Hiragana and Katakana Syllabaries" kanaSet={KANA} />,
+    <KanaBoard message="Japanese Hiragana and Katakana Syllabaries" kanaSet={KANA} className="kanaBoard" />,
     document.getElementById('root')
   );
  
