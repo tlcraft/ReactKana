@@ -70,7 +70,27 @@ const KANA = [
         {hira: 'め', kata: 'メ', eng: 'me'},
         {hira: 'も', kata: 'モ', eng: 'mo'}, 
     ],
-    //TODO Complete array
+    [ 
+        {hira: 'や', kata: 'ヤ', eng: 'ya'},
+        {hira: '', kata: '', eng: ''},
+        {hira: 'ゆ', kata: 'ユ', eng: 'yu'},
+        {hira: '', kata: '', eng: ''},
+        {hira: 'よ', kata: 'ヨ', eng: 'yo'}, 
+    ],
+    [ 
+        {hira: 'ら', kata: 'ラ', eng: 'ra'},
+        {hira: 'り', kata: 'リ', eng: 'ri'},
+        {hira: 'る', kata: 'ル', eng: 'ru'},
+        {hira: 'れ', kata: 'レ', eng: 're'},
+        {hira: 'ろ', kata: 'ロ', eng: 'ro'}, 
+    ],
+    [ 
+        {hira: 'わ', kata: 'ワ', eng: 'wa'},
+        {hira: '', kata: '', eng: ''},
+        {hira: 'を', kata: 'ヲ', eng: 'wo'},
+        {hira: '', kata: '', eng: ''},
+        {hira: 'ん', kata: 'ン', eng: 'n'}, 
+    ],
   ];
 
 function KanaRow(props) {
@@ -127,8 +147,7 @@ ReactDOM.render(
   まみむめも
   やゆよ
   らりるれろ
-  わを
-  ん
+  わをん
 
 　がぎぐげご
 　ざじずぜぞ
@@ -160,8 +179,7 @@ ReactDOM.render(
   マミムメモ
   ヤユヨ
   ラリルレロ
-  ワヲ
-  ン  
+  ワヲン  
   
 　ガギグゲゴ
 　ザジズゼゾ
