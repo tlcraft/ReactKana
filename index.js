@@ -107,14 +107,16 @@ function KanaRow(props) {
 
     return (
         <div className={props.className}>
-            {kana}
+            <ul>
+                {kana}
+            </ul>
         </div>
     );
 }
 
 function Kana (props) {
     return (
-        <div className={props.className}>
+        <li className={props.className}>
             <div className='hira'>
                 {props.hira}
             </div>
@@ -124,7 +126,7 @@ function Kana (props) {
             <div className='pronunciation'>
                 {props.pronunciation}
             </div>
-        </div>
+        </li>
     );
 }
 

@@ -3,18 +3,22 @@ body {
   max-width: 1000px;
   margin: auto;
 }
-
+ 
 div {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
 }
 
-.kana {
+div.kanaRow {
+  float: right;
+}
+
+li {
+  list-style: none;
   border: 1px solid; 
   padding: 40px;
   margin: 1px;
   width: 40px;
   height: 80px;
-  float: left;
 }
