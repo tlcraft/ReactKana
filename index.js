@@ -91,8 +91,43 @@ const KANA = [
         {hira: '', kata: '', eng: ''},
         {hira: 'ん', kata: 'ン', eng: 'n'}, 
     ],
+    [ 
+        {hira: 'が', kata: 'ガ', eng: 'ga'},
+        {hira: 'ぎ', kata: 'ギ', eng: 'gi'},
+        {hira: 'ぐ', kata: 'グ', eng: 'gu'},
+        {hira: 'げ', kata: 'ゲ', eng: 'ge'},
+        {hira: 'ご', kata: 'ゴ', eng: 'go'}, 
+    ],
+    [ 
+        {hira: 'ざ', kata: 'ザ', eng: 'za'},
+        {hira: 'じ', kata: 'ジ', eng: 'ji'},
+        {hira: 'ず', kata: 'ズ', eng: 'zu'},
+        {hira: 'ぜ', kata: 'ゼ', eng: 'ze'},
+        {hira: 'ぞ', kata: 'ゾ', eng: 'zo'}, 
+    ],
+    [ 
+        {hira: 'だ', kata: 'ダ', eng: 'da'},
+        {hira: 'ぢ', kata: 'ヂ', eng: 'dzi'},
+        {hira: 'づ', kata: 'ヅ', eng: 'dzu'},
+        {hira: 'で', kata: 'デ', eng: 'de'},
+        {hira: 'ど', kata: 'ド', eng: 'do'}, 
+    ],
+    [ 
+        {hira: 'ば', kata: 'バ', eng: 'ba'},
+        {hira: 'び', kata: 'ビ', eng: 'bi'},
+        {hira: 'ぶ', kata: 'ブ', eng: 'bu'},
+        {hira: 'べ', kata: 'ベ', eng: 'be'},
+        {hira: 'ぼ', kata: 'ボ', eng: 'bo'}, 
+    ],
+    [ 
+        {hira: 'ぱ', kata: 'パ', eng: 'pa'},
+        {hira: 'ぴ', kata: 'ピ', eng: 'pi'},
+        {hira: 'ぷ', kata: 'プ', eng: 'pu'},
+        {hira: 'ぺ', kata: 'ペ', eng: 'pe'},
+        {hira: 'ぽ', kata: 'ポ', eng: 'po'}, 
+    ],
   ];
-
+  
 function KanaRow(props) {
     let kana = props.kanaRow.map((k, i) => { 
         return (
