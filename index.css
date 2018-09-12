@@ -14,6 +14,10 @@ div.kanaRow {
   float: right;
 }
 
+div.kanaBoard {
+  overflow: hidden;
+}
+
 li {
   list-style: none;
   border: 1px solid; 

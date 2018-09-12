@@ -90,7 +90,10 @@ const KANA = [
         {hira: 'を', kata: 'ヲ', eng: 'wo'},
         {hira: '', kata: '', eng: ''},
         {hira: 'ん', kata: 'ン', eng: 'n'}, 
-    ],
+    ], 
+  ];  
+
+  const DAKUON = [
     [ 
         {hira: 'が', kata: 'ガ', eng: 'ga'},
         {hira: 'ぎ', kata: 'ギ', eng: 'gi'},
@@ -125,9 +128,26 @@ const KANA = [
         {hira: 'ぷ', kata: 'プ', eng: 'pu'},
         {hira: 'ぺ', kata: 'ペ', eng: 'pe'},
         {hira: 'ぽ', kata: 'ポ', eng: 'po'}, 
+    ],  
+  ]
+
+  const YOUON = [
+    [ 
+        {hira: 'きゃ', kata: 'キャ', eng: 'kya'},
+        {hira: '', kata: '', eng: ''},
+        {hira: 'きゅ', kata: 'キュ', eng: 'kyu'},
+        {hira: '', kata: '', eng: ''},
+        {hira: 'きょ', kata: 'キョ', eng: 'kyo'}, 
     ],
-  ];
-  
+    [ 
+        {hira: 'しゃ', kata: 'シャ', eng: 'sha'},
+        {hira: '', kata: '', eng: ''},
+        {hira: 'しゅ', kata: 'シュ', eng: 'shu'},
+        {hira: '', kata: '', eng: ''},
+        {hira: 'しょ', kata: 'ショ', eng: 'sho'}, 
+    ],
+  ]
+　
 function KanaRow(props) {
     let kana = props.kanaRow.map((k, i) => { 
         return (
@@ -165,8 +185,18 @@ function Kana (props) {
     );
 }
 
+function App (props) {
+    return (
+        <div>
+            <KanaBoard message="Japanese Hiragana and Katakana Syllabaries" kanaSet={KANA} className="kanaBoard" />
+            <KanaBoard message="Dakuon" kanaSet={DAKUON} className="kanaBoard" />
+            <KanaBoard message="Youon" kanaSet={YOUON} className="kanaBoard" />
+        </div>
+    )
+}
+
 ReactDOM.render(
-    <KanaBoard message="Japanese Hiragana and Katakana Syllabaries" kanaSet={KANA} className="kanaBoard" />,
+    <App />,
     document.getElementById('root')
   );
  
