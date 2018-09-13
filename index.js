@@ -20,6 +20,43 @@ function KanaBoard (props) {
     );
 }
 
+function KanaRow(props) {
+    let kana = props.kanaRow.map((k, i) => { 
+        return (
+            <Kana key={i}
+              hira={k.hira}
+              kata={k.kata}
+              pronunciation={k.eng}
+              className="kana"
+            />
+        );
+    });
+
+    return (
+        <div className={props.className}>
+            <ul>
+                {kana}
+            </ul>
+        </div>
+    );
+}
+
+function Kana (props) {
+    return (
+        <li className={props.className}>
+            <div className='hira'>
+                {props.hira}
+            </div>
+            <div className='kata'>
+                {props.kata}
+            </div>
+            <div className='pronunciation'>
+                {props.pronunciation}
+            </div>
+        </li>
+    );
+}
+
 const KANA = [
     [
         {hira: 'あ', kata: 'ア', eng: 'a'},
@@ -122,6 +159,9 @@ const KANA = [
         {hira: 'べ', kata: 'ベ', eng: 'be'},
         {hira: 'ぼ', kata: 'ボ', eng: 'bo'}, 
     ],
+  ]
+
+  const HANDAKUON = [
     [ 
         {hira: 'ぱ', kata: 'パ', eng: 'pa'},
         {hira: 'ぴ', kata: 'ピ', eng: 'pi'},
@@ -146,51 +186,93 @@ const KANA = [
         {hira: '', kata: '', eng: ''},
         {hira: 'しょ', kata: 'ショ', eng: 'sho'}, 
     ],
+    [ 
+        {hira: 'ちゃ', kata: 'チャ', eng: 'cha'},
+        {hira: '', kata: '', eng: ''},
+        {hira: 'ちゅ', kata: 'チュ', eng: 'chu'},
+        {hira: '', kata: '', eng: ''},
+        {hira: 'ちょ', kata: 'チョ', eng: 'cho'}, 
+    ],
+    [ 
+        {hira: 'にゃ', kata: 'ニャ', eng: 'nya'},
+        {hira: '', kata: '', eng: ''},
+        {hira: 'にゅ', kata: 'ニュ', eng: 'nyu'},
+        {hira: '', kata: '', eng: ''},
+        {hira: 'にょ', kata: 'ニョ', eng: 'nyo'}, 
+    ],
+    [ 
+        {hira: 'ひゃ', kata: 'ヒャ', eng: 'hya'},
+        {hira: '', kata: '', eng: ''},
+        {hira: 'ひゅ', kata: 'ヒュ', eng: 'hyu'},
+        {hira: '', kata: '', eng: ''},
+        {hira: 'ひょ', kata: 'ヒョ', eng: 'hyo'}, 
+    ],
+    [ 
+        {hira: 'みゃ', kata: 'ミャ', eng: 'mya'},
+        {hira: '', kata: '', eng: ''},
+        {hira: 'みゅ', kata: 'ミュ', eng: 'myu'},
+        {hira: '', kata: '', eng: ''},
+        {hira: 'みょ', kata: 'ミョ', eng: 'myo'}, 
+    ],
+    [ 
+        {hira: 'りゃ', kata: 'リャ', eng: 'rya'},
+        {hira: '', kata: '', eng: ''},
+        {hira: 'りゅ', kata: 'リュ', eng: 'ryu'},
+        {hira: '', kata: '', eng: ''},
+        {hira: 'りょ', kata: 'リョ', eng: 'ryo'}, 
+    ],
+  ]
+
+  const YOUONDAKUON = [
+    [ 
+        {hira: 'ぎゃ', kata: 'ギャ', eng: 'gya'},
+        {hira: '', kata: '', eng: ''},
+        {hira: 'ぎゅ', kata: 'ギュ', eng: 'gyu'},
+        {hira: '', kata: '', eng: ''},
+        {hira: 'ぎょ', kata: 'ギョ', eng: 'gyo'}, 
+    ],
+    [ 
+        {hira: 'じゃ', kata: 'ジャ', eng: 'ja'},
+        {hira: '', kata: '', eng: ''},
+        {hira: 'じゅ', kata: 'ジュ', eng: 'ju'},
+        {hira: '', kata: '', eng: ''},
+        {hira: 'じょ', kata: 'ジョ', eng: 'jo'}, 
+    ],
+    [ 
+        {hira: 'ぢゃ', kata: 'ヂャ', eng: 'ja'},
+        {hira: '', kata: '', eng: ''},
+        {hira: 'ぢゅ', kata: 'ヂュ', eng: 'ju'},
+        {hira: '', kata: '', eng: ''},
+        {hira: 'ぢょ', kata: 'ヂョ', eng: 'jo'}, 
+    ],
+    [ 
+        {hira: 'びゃ', kata: 'ビャ', eng: 'bya'},
+        {hira: '', kata: '', eng: ''},
+        {hira: 'びゅ', kata: 'ビュ', eng: 'byu'},
+        {hira: '', kata: '', eng: ''},
+        {hira: 'びょ', kata: 'ビョ', eng: 'byo'}, 
+    ],
+  ]
+
+  const YOUONHANDAKUON = [
+    [ 
+        {hira: 'ぴゃ', kata: 'ピャ', eng: 'pya'},
+        {hira: '', kata: '', eng: ''},
+        {hira: 'ぴゅ', kata: 'ピュ', eng: 'pyu'},
+        {hira: '', kata: '', eng: ''},
+        {hira: 'ぴょ', kata: 'ピョ', eng: 'pyo'}, 
+    ],
   ]
 　
-function KanaRow(props) {
-    let kana = props.kanaRow.map((k, i) => { 
-        return (
-            <Kana key={i}
-              hira={k.hira}
-              kata={k.kata}
-              pronunciation={k.eng}
-              className="kana"
-            />
-        );
-    });
-
-    return (
-        <div className={props.className}>
-            <ul>
-                {kana}
-            </ul>
-        </div>
-    );
-}
-
-function Kana (props) {
-    return (
-        <li className={props.className}>
-            <div className='hira'>
-                {props.hira}
-            </div>
-            <div className='kata'>
-                {props.kata}
-            </div>
-            <div className='pronunciation'>
-                {props.pronunciation}
-            </div>
-        </li>
-    );
-}
-
 function App (props) {
     return (
         <div>
             <KanaBoard message="Japanese Hiragana and Katakana Syllabaries" kanaSet={KANA} className="kanaBoard" />
             <KanaBoard message="Dakuon" kanaSet={DAKUON} className="kanaBoard" />
+            <KanaBoard message="Han-Dakuon" kanaSet={HANDAKUON} className="kanaBoard" />
             <KanaBoard message="Youon" kanaSet={YOUON} className="kanaBoard" />
+            <KanaBoard message="Youon Dakuon" kanaSet={YOUONDAKUON} className="kanaBoard" />
+            <KanaBoard message="Youon Han-Dakuon" kanaSet={YOUONHANDAKUON} className="kanaBoard" />
         </div>
     )
 }
