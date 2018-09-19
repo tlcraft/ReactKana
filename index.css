@@ -10,6 +10,10 @@ div {
   font-family: sans-serif;
 }
 
+.container {
+  margin-right: 50px;
+}
+
 div.kanaRow {
   float: right;
 }

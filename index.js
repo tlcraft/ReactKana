@@ -15,13 +15,15 @@ function KanaBoard (props) {
     return (
         <div className={props.className}>
             <h1>{props.message}</h1>
-            {kanaTable}
+            <div class="container">
+                {kanaTable}
+            </div>
         </div>
     );
 }
 
 function KanaRow(props) {
-    let kana = props.kanaRow.map((k, i) => { 
+    let kanaRow = props.kanaRow.map((k, i) => { 
         return (
             <Kana key={i}
               hira={k.hira}
@@ -35,7 +37,7 @@ function KanaRow(props) {
     return (
         <div className={props.className}>
             <ul>
-                {kana}
+                {kanaRow}
             </ul>
         </div>
     );
@@ -276,6 +278,11 @@ function App (props) {
         </div>
     )
 }
+
+// TODO
+// Gather a random list of kana
+// Using that list draw cards upside down
+// Play the concentration/memory card game to match hiragana and katakana
 
 ReactDOM.render(
     <App />,
