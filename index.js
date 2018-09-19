@@ -15,7 +15,7 @@ function KanaBoard (props) {
     return (
         <div className={props.className}>
             <h1>{props.message}</h1>
-            <div class="container">
+            <div className="container">
                 {kanaTable}
             </div>
         </div>
