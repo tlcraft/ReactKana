@@ -275,8 +275,54 @@ function App (props) {
             <KanaBoard message="Youon" kanaSet={YOUON} className="kanaBoard" />
             <KanaBoard message="Youon Dakuon" kanaSet={YOUONDAKUON} className="kanaBoard" />
             <KanaBoard message="Youon Han-Dakuon" kanaSet={YOUONHANDAKUON} className="kanaBoard" />
+            <GameBoard kanaSet={KANA} />
         </div>
     )
+}
+
+class GameBoard extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            board: props.kanaSet
+        };
+    }
+
+    render() {
+        return (
+            <div>
+                <div>Memory Game</div>
+                <Card kana="ぴょ" pronunciation="pyo" onClick="" />
+            </div>
+        );
+    }
+}
+
+class Card extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            kana: props.kana,
+            pronunciation: props.pronunciation,
+            onClick: props.onClick
+        };
+    }
+
+    //TODO onClick return card ID to GameBoard
+
+    render() {
+        return (
+            <button
+             onClick={this.state.onClick}
+            >
+                {this.state.kana}
+                <br/>
+                {this.state.pronunciation}
+            </button>
+        );
+    }
 }
 
 // TODO
