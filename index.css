@@ -10,6 +10,17 @@ div {
   font-family: sans-serif;
 }
 
+.gameBoard {
+  margin-bottom: 50px;
+}
+
+.card {
+  padding: 40px;
+  background-color: whitesmoke;
+  border: 1px solid red;
+  font-size: 1em;
+}
+
 .container {
   margin-right: 50px;
 }

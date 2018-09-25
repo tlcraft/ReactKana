@@ -289,11 +289,15 @@ class GameBoard extends React.Component {
         };
     }
 
+    handleCardClick() {
+        alert("Card Clicked!");
+    }
+
     render() {
         return (
-            <div>
-                <div>Memory Game</div>
-                <Card kana="ぴょ" pronunciation="pyo" onClick="" />
+            <div className="gameBoard">
+                <h1>Memory Game</h1>
+                <Card kana="ぴょ" pronunciation="pyo" onClick={() => this.handleCardClick()} />
             </div>
         );
     }
@@ -316,6 +320,7 @@ class Card extends React.Component {
         return (
             <button
              onClick={this.state.onClick}
+             className="card"
             >
                 {this.state.kana}
                 <br/>
