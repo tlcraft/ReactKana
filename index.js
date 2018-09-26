@@ -275,7 +275,7 @@ function App (props) {
             <KanaBoard message="Youon" kanaSet={YOUON} className="kanaBoard" />
             <KanaBoard message="Youon Dakuon" kanaSet={YOUONDAKUON} className="kanaBoard" />
             <KanaBoard message="Youon Han-Dakuon" kanaSet={YOUONHANDAKUON} className="kanaBoard" />
-            <GameBoard kanaSet={KANA} />
+            <GameBoard kanaSet={YOUONHANDAKUON} />
         </div>
     )
 }
@@ -285,7 +285,7 @@ class GameBoard extends React.Component {
         super(props);
 
         this.state = {
-            board: props.kanaSet
+            board: randomKanaSet(100, props.kanaSet)
         };
     }
 
@@ -294,10 +294,21 @@ class GameBoard extends React.Component {
     }
 
     render() {
+        const cardList = this.state.board;
+        let cards = cardList.map((c, i) => { 
+            return (
+                <Card key={i}
+                    kana={c.hira}
+                    pronunciation={c.eng}
+                    onClick={() => this.handleCardClick()}
+                />
+            );
+        });
+        
         return (
             <div className="gameBoard">
                 <h1>Memory Game</h1>
-                <Card kana="ぴょ" pronunciation="pyo" onClick={() => this.handleCardClick()} />
+                {cards}
             </div>
         );
     }
@@ -328,6 +339,28 @@ class Card extends React.Component {
             </button>
         );
     }
+}
+
+function randomKanaSet(numberOfCards, kanaSet) {
+    let randomCards = [];
+    let rowIndex = 0;
+    let colIndex = 0;
+
+    //TODO check against correct number of cards in array (array of arrays total length)
+    if ( numberOfCards <= 0 || numberOfCards > kanaSet.length ) {
+        //TODO set to a value less than the total number of cards
+        numberOfCards = kanaSet.length;
+    }       
+
+    for ( let i = 0; i < numberOfCards; i++) {
+        rowIndex = Math.floor(Math.random() * kanaSet.length);
+        colIndex = Math.floor(Math.random() * kanaSet[rowIndex].length);
+        //TODO Skip blanks
+        
+        randomCards.push(kanaSet[rowIndex][colIndex]);
+    }
+
+    return randomCards;
 }
 
 // TODO
