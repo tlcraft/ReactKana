@@ -346,18 +346,20 @@ function randomKanaSet(numberOfCards, kanaSet) {
     let rowIndex = 0;
     let colIndex = 0;
 
-    //TODO check against correct number of cards in array (array of arrays total length)
-    if ( numberOfCards <= 0 || numberOfCards > kanaSet.length ) {
-        //TODO set to a value less than the total number of cards
-        numberOfCards = kanaSet.length;
-    }       
+    if (kanaSet.length > 0) {
+        //TODO check against correct number of cards in array (array of arrays total length)
+        if ( numberOfCards <= 0 || numberOfCards > kanaSet.length ) {
+            numberOfCards = Math.ceil(kanaSet.length / 4);
+        }       
 
-    for ( let i = 0; i < numberOfCards; i++) {
-        rowIndex = Math.floor(Math.random() * kanaSet.length);
-        colIndex = Math.floor(Math.random() * kanaSet[rowIndex].length);
-        //TODO Skip blanks
-        
-        randomCards.push(kanaSet[rowIndex][colIndex]);
+        for ( let i = 0; i < numberOfCards; i++) {
+            do {            
+                rowIndex = Math.floor(Math.random() * kanaSet.length);
+                colIndex = Math.floor(Math.random() * kanaSet[rowIndex].length);
+            } while (kanaSet[rowIndex][colIndex].hira === "")
+
+            randomCards.push(kanaSet[rowIndex][colIndex]);
+        }
     }
 
     return randomCards;
