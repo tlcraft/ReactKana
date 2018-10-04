@@ -24,14 +24,22 @@ function KanaBoard (props) {
 
 function KanaRow(props) {
     let kanaRow = props.kanaRow.map((k, i) => { 
-        return (
-            <Kana key={i}
-              hira={k.hira}
-              kata={k.kata}
-              pronunciation={k.eng}
-              className="kana"
-            />
-        );
+        if ( k !== null) {
+            return (
+                <Kana key={i}
+                hira={k.hira}
+                kata={k.kata}
+                pronunciation={k.eng}
+                className="kana"
+                />
+            );
+        } else {
+            return (
+                <Kana key={i}
+                className="kana"
+                />
+            );
+        }
     });
 
     return (
@@ -259,9 +267,9 @@ const KANA = [
   const YOUONHANDAKUON = [
     [ 
         {hira: 'ぴゃ', kata: 'ピャ', eng: 'pya'},
-        {hira: '', kata: '', eng: ''},
+        null,
         {hira: 'ぴゅ', kata: 'ピュ', eng: 'pyu'},
-        {hira: '', kata: '', eng: ''},
+        null,
         {hira: 'ぴょ', kata: 'ピョ', eng: 'pyo'}, 
     ],
   ]
@@ -296,13 +304,19 @@ class GameBoard extends React.Component {
     render() {
         const cardList = this.state.board;
         let cards = cardList.map((c, i) => { 
-            return (
-                <Card key={i}
-                    kana={c.hira}
-                    pronunciation={c.eng}
-                    onClick={() => this.handleCardClick()}
-                />
-            );
+            if (c !== null) {
+                return (
+                    <Card key={i}
+                        kana={c.hira}
+                        pronunciation={c.eng}
+                        onClick={() => this.handleCardClick()}
+                    />
+                );
+            } else {
+                return (
+                    <Card key={i} />
+                );
+            }
         });
         
         return (
@@ -356,7 +370,7 @@ function randomKanaSet(numberOfCards, kanaSet) {
             do {            
                 rowIndex = Math.floor(Math.random() * kanaSet.length);
                 colIndex = Math.floor(Math.random() * kanaSet[rowIndex].length);
-            } while (kanaSet[rowIndex][colIndex].hira === "")
+            } while (kanaSet[rowIndex][colIndex] === null)
 
             randomCards.push(kanaSet[rowIndex][colIndex]);
         }
