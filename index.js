@@ -119,9 +119,9 @@ const KANA = [
     ],
     [ 
         {hira: 'や', kata: 'ヤ', eng: 'ya'},
-        {hira: '', kata: '', eng: ''},
+        null,
         {hira: 'ゆ', kata: 'ユ', eng: 'yu'},
-        {hira: '', kata: '', eng: ''},
+        null,
         {hira: 'よ', kata: 'ヨ', eng: 'yo'}, 
     ],
     [ 
@@ -133,9 +133,9 @@ const KANA = [
     ],
     [ 
         {hira: 'わ', kata: 'ワ', eng: 'wa'},
-        {hira: '', kata: '', eng: ''},
+        null,
         {hira: 'を', kata: 'ヲ', eng: 'wo'},
-        {hira: '', kata: '', eng: ''},
+        null,
         {hira: 'ん', kata: 'ン', eng: 'n'}, 
     ], 
   ];  
@@ -184,51 +184,51 @@ const KANA = [
   const YOUON = [
     [ 
         {hira: 'きゃ', kata: 'キャ', eng: 'kya'},
-        {hira: '', kata: '', eng: ''},
+        null,
         {hira: 'きゅ', kata: 'キュ', eng: 'kyu'},
-        {hira: '', kata: '', eng: ''},
+        null,
         {hira: 'きょ', kata: 'キョ', eng: 'kyo'}, 
     ],
     [ 
         {hira: 'しゃ', kata: 'シャ', eng: 'sha'},
-        {hira: '', kata: '', eng: ''},
+        null,
         {hira: 'しゅ', kata: 'シュ', eng: 'shu'},
-        {hira: '', kata: '', eng: ''},
+        null,
         {hira: 'しょ', kata: 'ショ', eng: 'sho'}, 
     ],
     [ 
         {hira: 'ちゃ', kata: 'チャ', eng: 'cha'},
-        {hira: '', kata: '', eng: ''},
+        null,
         {hira: 'ちゅ', kata: 'チュ', eng: 'chu'},
-        {hira: '', kata: '', eng: ''},
+        null,
         {hira: 'ちょ', kata: 'チョ', eng: 'cho'}, 
     ],
     [ 
         {hira: 'にゃ', kata: 'ニャ', eng: 'nya'},
-        {hira: '', kata: '', eng: ''},
+        null,
         {hira: 'にゅ', kata: 'ニュ', eng: 'nyu'},
-        {hira: '', kata: '', eng: ''},
+        null,
         {hira: 'にょ', kata: 'ニョ', eng: 'nyo'}, 
     ],
     [ 
         {hira: 'ひゃ', kata: 'ヒャ', eng: 'hya'},
-        {hira: '', kata: '', eng: ''},
+        null,
         {hira: 'ひゅ', kata: 'ヒュ', eng: 'hyu'},
-        {hira: '', kata: '', eng: ''},
+        null,
         {hira: 'ひょ', kata: 'ヒョ', eng: 'hyo'}, 
     ],
     [ 
         {hira: 'みゃ', kata: 'ミャ', eng: 'mya'},
-        {hira: '', kata: '', eng: ''},
+        null,
         {hira: 'みゅ', kata: 'ミュ', eng: 'myu'},
-        {hira: '', kata: '', eng: ''},
+        null,
         {hira: 'みょ', kata: 'ミョ', eng: 'myo'}, 
     ],
     [ 
         {hira: 'りゃ', kata: 'リャ', eng: 'rya'},
-        {hira: '', kata: '', eng: ''},
+        null,
         {hira: 'りゅ', kata: 'リュ', eng: 'ryu'},
-        {hira: '', kata: '', eng: ''},
+        null,
         {hira: 'りょ', kata: 'リョ', eng: 'ryo'}, 
     ],
   ]
@@ -236,30 +236,30 @@ const KANA = [
   const YOUONDAKUON = [
     [ 
         {hira: 'ぎゃ', kata: 'ギャ', eng: 'gya'},
-        {hira: '', kata: '', eng: ''},
+        null,
         {hira: 'ぎゅ', kata: 'ギュ', eng: 'gyu'},
-        {hira: '', kata: '', eng: ''},
+        null,
         {hira: 'ぎょ', kata: 'ギョ', eng: 'gyo'}, 
     ],
     [ 
         {hira: 'じゃ', kata: 'ジャ', eng: 'ja'},
-        {hira: '', kata: '', eng: ''},
+        null,
         {hira: 'じゅ', kata: 'ジュ', eng: 'ju'},
-        {hira: '', kata: '', eng: ''},
+        null,
         {hira: 'じょ', kata: 'ジョ', eng: 'jo'}, 
     ],
     [ 
         {hira: 'ぢゃ', kata: 'ヂャ', eng: 'ja'},
-        {hira: '', kata: '', eng: ''},
+        null,
         {hira: 'ぢゅ', kata: 'ヂュ', eng: 'ju'},
-        {hira: '', kata: '', eng: ''},
+        null,
         {hira: 'ぢょ', kata: 'ヂョ', eng: 'jo'}, 
     ],
     [ 
         {hira: 'びゃ', kata: 'ビャ', eng: 'bya'},
-        {hira: '', kata: '', eng: ''},
+        null,
         {hira: 'びゅ', kata: 'ビュ', eng: 'byu'},
-        {hira: '', kata: '', eng: ''},
+        null,
         {hira: 'びょ', kata: 'ビョ', eng: 'byo'}, 
     ],
   ]
@@ -283,7 +283,7 @@ function App (props) {
             <KanaBoard message="Youon" kanaSet={YOUON} className="kanaBoard" />
             <KanaBoard message="Youon Dakuon" kanaSet={YOUONDAKUON} className="kanaBoard" />
             <KanaBoard message="Youon Han-Dakuon" kanaSet={YOUONHANDAKUON} className="kanaBoard" />
-            <GameBoard kanaSet={YOUONHANDAKUON} />
+            <GameBoard kanaSet={KANA} />
         </div>
     )
 }
@@ -361,9 +361,9 @@ function randomKanaSet(numberOfCards, kanaSet) {
     let colIndex = 0;
 
     if (kanaSet.length > 0) {
-        //TODO check against correct number of cards in array (array of arrays total length)
-        if ( numberOfCards <= 0 || numberOfCards > kanaSet.length ) {
-            numberOfCards = Math.ceil(kanaSet.length / 4);
+        let totalSet = kanaSet.length * kanaSet[0].length;
+        if ( numberOfCards <= 0 || numberOfCards > totalSet ) {
+            numberOfCards = Math.ceil(totalSet / 4);
         }       
 
         for ( let i = 0; i < numberOfCards; i++) {
