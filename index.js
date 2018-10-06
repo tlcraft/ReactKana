@@ -307,7 +307,7 @@ class GameBoard extends React.Component {
             if (c !== null) {
                 return (
                     <Card key={i}
-                        kana={c.hira}
+                        kana={c.kana}
                         pronunciation={c.eng}
                         onClick={() => this.handleCardClick()}
                     />
@@ -372,7 +372,8 @@ function randomKanaSet(numberOfCards, kanaSet) {
                 colIndex = Math.floor(Math.random() * kanaSet[rowIndex].length);
             } while (kanaSet[rowIndex][colIndex] === null)
 
-            randomCards.push(kanaSet[rowIndex][colIndex]);
+            randomCards.push({ "kana": kanaSet[rowIndex][colIndex].hira, "eng": kanaSet[rowIndex][colIndex].eng });
+            randomCards.push({ "kana": kanaSet[rowIndex][colIndex].kata, "eng": kanaSet[rowIndex][colIndex].eng });
         }
     }
 
