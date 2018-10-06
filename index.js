@@ -293,12 +293,81 @@ class GameBoard extends React.Component {
         super(props);
 
         this.state = {
-            board: randomKanaSet(100, props.kanaSet)
+            board: randomKanaSet(100, props.kanaSet),
+            cardOneIndex: -1,
+            cardTwoIndex: -1,
+            hasTwoCards: false,
+            missed: 0,
         };
     }
 
-    handleCardClick() {
-        alert("Card Clicked!");
+    //TODO IsGameOver()
+
+    handleCardClick(index) {
+        let hasTwoCards = this.state.hasTwoCards;
+        let cardOneIndex = this.state.cardOneIndex;
+        let cardTwoIndex = this.state.cardTwoIndex;
+        let cardOne, cardTwo = null;
+        let missed = this.state.missed;
+        let board = this.state.board;
+        let canCompare;
+
+        if ( hasTwoCards ) {
+            cardOneIndex = -1;
+            cardTwoIndex = -1;
+            hasTwoCards = false;
+        }         
+        
+        if ( cardOneIndex >= 0 ) {
+            cardOne = board[cardOneIndex];
+        }
+        if ( cardTwoIndex >= 0 ) {
+            cardTwo = board[cardTwoIndex];
+        }
+
+        if ( cardOne == null ) {
+            cardOneIndex = index;
+            cardOne = board[cardOneIndex];
+        } else if ( cardTwo == null ) {
+            cardTwoIndex = index;
+            cardTwo = board[cardTwoIndex];
+            hasTwoCards = true;
+        } else {
+            alert("No free cards. Index: " + index);
+        }
+
+        canCompare = (cardOne !== null && cardOne.isFound === false) && (cardTwo !== null && cardTwo.isFound === false)
+        alert("Can Compare: " + canCompare + "hasTwoCards " + hasTwoCards);
+        if ( canCompare ) {
+            if ( hasTwoCards ) {
+                if (cardOne.eng === cardTwo.eng) {
+                    board[cardOneIndex].isFound = true;
+                    board[cardTwoIndex].isFound = true;
+                    alert("Match!");
+                } else {
+                    missed++;
+                    alert("Missed!");
+                }
+            }
+        } else {
+            if (cardOne !== null && cardOne.isFound === true) {
+                cardOne = null;
+                cardOneIndex = -1;
+            }
+
+            if (cardTwo !== null && cardTwo.isFound === true) {
+                cardTwo = null;
+                cardTwoIndex = -1;
+            }
+        }
+
+        this.setState({
+            board: board,
+            cardOneIndex: cardOneIndex,
+            cardTwoIndex: cardTwoIndex,
+            hasTwoCards: hasTwoCards,
+            missed: missed,
+        });
     }
 
     render() {
@@ -309,7 +378,8 @@ class GameBoard extends React.Component {
                     <Card key={i}
                         kana={c.kana}
                         pronunciation={c.eng}
-                        onClick={() => this.handleCardClick()}
+                        onCardClick={() => this.handleCardClick(i)}
+                        isFound={c.isFound}
                     />
                 );
             } else {
@@ -322,6 +392,7 @@ class GameBoard extends React.Component {
         return (
             <div className="gameBoard">
                 <h1>Memory Game</h1>
+                <h2>Misses: {this.state.missed}</h2>
                 {cards}
             </div>
         );
@@ -335,16 +406,23 @@ class Card extends React.Component {
         this.state = {
             kana: props.kana,
             pronunciation: props.pronunciation,
-            onClick: props.onClick
+            onCardClick: props.onCardClick,
+            isFound: props.isFound,
         };
     }
 
-    //TODO onClick return card ID to GameBoard
+    handleClick() {
+        //TODO Fix card state
+        alert("clicked card. " + this.state.isFound);
+        if (this.state.isFound === false) {
+            this.state.onCardClick();
+        }
+    }
 
     render() {
         return (
             <button
-             onClick={this.state.onClick}
+             onClick={() => this.handleClick()}
              className="card"
             >
                 {this.state.kana}
@@ -372,13 +450,33 @@ function randomKanaSet(numberOfCards, kanaSet) {
                 colIndex = Math.floor(Math.random() * kanaSet[rowIndex].length);
             } while (kanaSet[rowIndex][colIndex] === null)
 
-            randomCards.push({ "kana": kanaSet[rowIndex][colIndex].hira, "eng": kanaSet[rowIndex][colIndex].eng });
-            randomCards.push({ "kana": kanaSet[rowIndex][colIndex].kata, "eng": kanaSet[rowIndex][colIndex].eng });
+            randomCards.push({ "kana": kanaSet[rowIndex][colIndex].hira, "eng": kanaSet[rowIndex][colIndex].eng, "isFound": false });
+            randomCards.push({ "kana": kanaSet[rowIndex][colIndex].kata, "eng": kanaSet[rowIndex][colIndex].eng, "isFound": false });
         }
     }
 
-    return randomCards;
+    return shuffle(randomCards);
 }
+
+//Source: https://stackoverflow.com/a/2450976/8094831
+function shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+  
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+  
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+  
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+  
+    return array;
+  }
 
 // TODO
 // Gather a random list of five kana
