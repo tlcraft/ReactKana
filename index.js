@@ -293,7 +293,7 @@ class GameBoard extends React.Component {
         super(props);
 
         this.state = {
-            board: randomKanaSet(100, props.kanaSet),
+            board: randomKanaSet(2, props.kanaSet),
             cardOneIndex: -1,
             cardTwoIndex: -1,
             hasTwoCards: false,
@@ -301,7 +301,19 @@ class GameBoard extends React.Component {
         };
     }
 
-    //TODO IsGameOver()
+    isGameOver() {
+        let isOver = true;
+        const board = this.state.board;
+
+        for( let i = 0; i < board.length; i++) {
+            if (board[i].isFound === false) {
+                isOver = false;
+                break;
+            }
+        }
+
+        return isOver;
+    }
 
     handleCardClick(index) {
         let hasTwoCards = this.state.hasTwoCards;
@@ -372,6 +384,8 @@ class GameBoard extends React.Component {
 
     render() {
         const cardList = this.state.board;
+        const gameOverMessage = this.isGameOver() ? "You won!" : "";
+
         let cards = cardList.map((c, i) => { 
             if (c !== null) {
                 return (
@@ -392,6 +406,7 @@ class GameBoard extends React.Component {
         return (
             <div className="gameBoard">
                 <h1>Memory Game</h1>
+                <h2>{gameOverMessage}</h2>
                 <h2>Misses: {this.state.missed}</h2>
                 {cards}
             </div>
