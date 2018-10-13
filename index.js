@@ -305,7 +305,7 @@ class GameBoard extends React.Component {
         let isOver = true;
         const board = this.state.board;
 
-        for( let i = 0; i < board.length; i++) {
+        for( let i = 0; i < board.length; i++ ) {
             if (board[i].isFound === false) {
                 isOver = false;
                 break;
@@ -319,7 +319,7 @@ class GameBoard extends React.Component {
         let hasTwoCards = this.state.hasTwoCards;
         let cardOneIndex = this.state.cardOneIndex;
         let cardTwoIndex = this.state.cardTwoIndex;
-        let cardOne, cardTwo = null;
+        let cardOne = null, cardTwo = null;
         let missed = this.state.missed;
         let board = this.state.board;
         let canCompare;
@@ -337,37 +337,36 @@ class GameBoard extends React.Component {
             cardTwo = board[cardTwoIndex];
         }
 
-        if ( cardOne == null ) {
+        if ( cardOne === null ) {
             cardOneIndex = index;
             cardOne = board[cardOneIndex];
-        } else if ( cardTwo == null ) {
+        } else if ( cardTwo === null ) {
             cardTwoIndex = index;
             cardTwo = board[cardTwoIndex];
             hasTwoCards = true;
         } else {
-            alert("No free cards. Index: " + index);
+            console.error("No free cards. Index: " + index);
         }
 
-        canCompare = (cardOne !== null && cardOne.isFound === false) && (cardTwo !== null && cardTwo.isFound === false)
-        alert("Can Compare: " + canCompare + "hasTwoCards " + hasTwoCards);
-        if ( canCompare ) {
-            if ( hasTwoCards ) {
-                if (cardOne.eng === cardTwo.eng) {
-                    board[cardOneIndex].isFound = true;
-                    board[cardTwoIndex].isFound = true;
-                    alert("Match!");
-                } else {
-                    missed++;
-                    alert("Missed!");
-                }
+        // Using type coercion to check for null and undefined with != instead of !==
+        canCompare = (cardOne != null && cardOne.isFound === false) && (cardTwo != null && cardTwo.isFound === false)
+        console.log("Can Compare: " + canCompare + " hasTwoCards " + hasTwoCards);
+        if ( canCompare && hasTwoCards) {
+            if (cardOne.eng === cardTwo.eng) {
+                board[cardOneIndex].isFound = true;
+                board[cardTwoIndex].isFound = true;
+                alert("Match!");
+            } else {
+                missed++;
+                alert("Missed!");
             }
         } else {
-            if (cardOne !== null && cardOne.isFound === true) {
+            if (cardOne != null && cardOne.isFound === true) {
                 cardOne = null;
                 cardOneIndex = -1;
             }
 
-            if (cardTwo !== null && cardTwo.isFound === true) {
+            if (cardTwo != null && cardTwo.isFound === true) {
                 cardTwo = null;
                 cardTwoIndex = -1;
             }
@@ -428,7 +427,7 @@ class Card extends React.Component {
 
     handleClick() {
         //TODO Fix card state
-        alert("clicked card. " + this.state.isFound);
+        console.log("clicked card. isFound: " + this.state.isFound);
         if (this.state.isFound === false) {
             this.state.onCardClick();
         }
@@ -494,10 +493,9 @@ function shuffle(array) {
   }
 
 // TODO
-// Gather a random list of five kana
 // Using that list draw cards upside down (generate a new list of "cards" by creating separate hiragana and katakana objects)
 // Play the concentration/memory card game to match hiragana and katakana (display a GameBoard with Card components)
-// GameBoard will hold the state, Cards will begin as buttons which can be clicked to reveal their value
+// Cards will begin as buttons which can be clicked to reveal their value
 // Matching cards will update to an isMatched state of true and stop rendering or being interactive
 // Add a start and restart button
 
