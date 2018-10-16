@@ -293,12 +293,24 @@ class GameBoard extends React.Component {
         super(props);
 
         this.state = {
+            kanaSet: props.kanaSet,
             board: randomKanaSet(2, props.kanaSet),
             cardOneIndex: -1,
             cardTwoIndex: -1,
             hasTwoCards: false,
             missed: 0,
         };
+    }
+
+    newGameClick() {
+        const kanaSet = this.state.kanaSet;
+        this.setState({
+            board: randomKanaSet(2, kanaSet),
+            cardOneIndex: -1,
+            cardTwoIndex: -1,
+            hasTwoCards: false,
+            missed: 0,
+        });
     }
 
     isGameOver() {
@@ -405,6 +417,9 @@ class GameBoard extends React.Component {
         return (
             <div className="gameBoard">
                 <h1>Memory Game</h1>
+                <div>
+                    <button onClick={() => this.newGameClick()}>New Game</button>
+                </div>
                 <h2>{gameOverMessage}</h2>
                 <h2>Misses: {this.state.missed}</h2>
                 {cards}
@@ -452,7 +467,7 @@ function randomKanaSet(numberOfCards, kanaSet) {
     let rowIndex = 0;
     let colIndex = 0;
 
-    if (kanaSet.length > 0) {
+    if (kanaSet != null && kanaSet.length > 0) {
         let totalSet = kanaSet.length * kanaSet[0].length;
         if ( numberOfCards <= 0 || numberOfCards > totalSet ) {
             numberOfCards = Math.ceil(totalSet / 4);
