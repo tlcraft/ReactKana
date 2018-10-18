@@ -516,8 +516,7 @@ function shuffle(array) {
 // Using that list draw cards upside down (generate a new list of "cards" by creating separate hiragana and katakana objects)
 // Play the concentration/memory card game to match hiragana and katakana (display a GameBoard with Card components)
 // Cards will begin as buttons which can be clicked to reveal their value
-// Matching cards will update to an isMatched state of true and stop rendering or being interactive
-// Add a start and restart button
+// Add a start and restart button, fix the display, redraw the cards when a new game starts.
 
 ReactDOM.render(
     <App />,
