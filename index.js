@@ -328,6 +328,16 @@ class GameBoard extends React.Component {
     }
 
     handleCardClick(index) {
+        //TODO error handling
+        const isFound = this.state.board[index].isFound;
+
+        console.log("clicked card. isFound: " + isFound);
+        if (isFound === false) {
+            this.processCards(index);
+        }
+    }
+
+    processCards(index) {
         let hasTwoCards = this.state.hasTwoCards;
         let cardOneIndex = this.state.cardOneIndex;
         let cardTwoIndex = this.state.cardTwoIndex;
@@ -404,7 +414,6 @@ class GameBoard extends React.Component {
                         kana={c.kana}
                         pronunciation={c.eng}
                         onCardClick={() => this.handleCardClick(i)}
-                        isFound={c.isFound}
                     />
                 );
             } else {
@@ -436,22 +445,13 @@ class Card extends React.Component {
             kana: props.kana,
             pronunciation: props.pronunciation,
             onCardClick: props.onCardClick,
-            isFound: props.isFound,
         };
-    }
-
-    handleClick() {
-        //TODO Fix card state
-        console.log("clicked card. isFound: " + this.state.isFound);
-        if (this.state.isFound === false) {
-            this.state.onCardClick();
-        }
     }
 
     render() {
         return (
             <button
-             onClick={() => this.handleClick()}
+             onClick={() => this.state.onCardClick()}
              className="card"
             >
                 {this.state.kana}
