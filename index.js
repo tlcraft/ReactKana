@@ -332,6 +332,8 @@ class GameBoard extends React.Component {
         const isFound = this.state.board[index].isFound;
 
         console.log("clicked card. isFound: " + isFound);
+        console.log("clicked card. eng: " + this.state.board[index].eng);
+        console.log("clicked card. eng: " + this.state.board[index].kana);
         if (isFound === false) {
             this.processCards(index);
         }
