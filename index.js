@@ -328,14 +328,17 @@ class GameBoard extends React.Component {
     }
 
     handleCardClick(index) {
-        //TODO error handling
-        const isFound = this.state.board[index].isFound;
+        const board = this.state.board;
 
-        console.log("clicked card. isFound: " + isFound);
-        console.log("clicked card. eng: " + this.state.board[index].eng);
-        console.log("clicked card. eng: " + this.state.board[index].kana);
-        if (isFound === false) {
-            this.processCards(index);
+        if (index >= 0 && index < board.length) {
+            const isFound = board[index].isFound;
+
+            console.log("clicked card. isFound: " + isFound);
+            console.log("eng: " + board[index].eng);
+            console.log("kana: " + board[index].kana);
+            if (isFound === false) {
+                this.processCards(index);
+            }
         }
     }
 
