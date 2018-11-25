@@ -277,7 +277,7 @@ const KANA = [
 function App (props) {
     return (
         <div>
-            <GameBoard kanaSet={KANA} />
+            <GameBoard kanaSet={KANA} numberOfCards="2" />
             <KanaBoard message="Japanese Hiragana and Katakana Syllabaries" kanaSet={KANA} className="kanaBoard" />
             <KanaBoard message="Dakuon" kanaSet={DAKUON} className="kanaBoard" />
             <KanaBoard message="Han-Dakuon" kanaSet={HANDAKUON} className="kanaBoard" />
@@ -294,23 +294,37 @@ class GameBoard extends React.Component {
 
         this.state = {
             kanaSet: props.kanaSet,
-            board: randomKanaSet(2, props.kanaSet),
+            numberOfCards: props.numberOfCards,
+            board: randomKanaSet(props.numberOfCards, props.kanaSet),
             cardOneIndex: -1,
             cardTwoIndex: -1,
             hasTwoCards: false,
             missed: 0,
         };
+
+        this.handleNumberOfCardsChange = this.handleNumberOfCardsChange.bind(this);
     }
 
     newGameClick() {
         const kanaSet = this.state.kanaSet;
         this.setState({
-            board: randomKanaSet(2, kanaSet),
+            board: randomKanaSet(this.state.numberOfCards, kanaSet),
             cardOneIndex: -1,
             cardTwoIndex: -1,
             hasTwoCards: false,
             missed: 0,
         });
+
+        //TODO redraw the right cards on the screen
+        //this.forceUpdate();
+    }
+
+    handleNumberOfCardsChange(event) {
+        let newNumber = event.target.value;
+        if (newNumber > 47) {
+            newNumber = 47;
+        }
+        this.setState({numberOfCards: newNumber});
     }
 
     isGameOver() {
@@ -427,10 +441,16 @@ class GameBoard extends React.Component {
                 );
             }
         });
-        
+
         return (
             <div className="gameBoard">
                 <h1>Memory Game</h1>
+                <form className="numCards">
+                    <label>
+                        Number of cards to play with:
+                        <input type="text" value={this.state.numberOfCards} onChange={this.handleNumberOfCardsChange} />
+                    </label>
+                </form>
                 <div>
                     <button onClick={() => this.newGameClick()}>New Game</button>
                 </div>
@@ -513,10 +533,10 @@ function shuffle(array) {
   }
 
 // TODO
-// Using that list draw cards upside down (generate a new list of "cards" by creating separate hiragana and katakana objects)
+// Using the card list draw cards flipped face down
 // Play the concentration/memory card game to match hiragana and katakana (display a GameBoard with Card components)
-// Cards will begin as buttons which can be clicked to reveal their value
-// Add a start and restart button, fix the display, redraw the cards when a new game starts.
+// Cards will begin as buttons which can be clicked to reveal their value and "flip" over during the matching attempt process
+// Redraw the cards when a new game starts.
 
 ReactDOM.render(
     <App />,
