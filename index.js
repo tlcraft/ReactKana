@@ -390,7 +390,7 @@ class GameBoard extends React.Component {
         }
 
         // Using type coercion to check for null and undefined with != instead of !==
-        canCompare = (cardOne != null && cardOne.isFound === false) && (cardTwo != null && cardTwo.isFound === false)
+        canCompare = (cardOne != null && cardOne.isFound === false) && (cardTwo != null && cardTwo.isFound === false) && cardOne.kana !== cardTwo.kana
         console.log("Can Compare: " + canCompare + " hasTwoCards " + hasTwoCards);
         if ( canCompare && hasTwoCards) {
             if (cardOne.eng === cardTwo.eng) {
