@@ -422,11 +422,9 @@ class GameBoard extends React.Component {
         });
     }
 
-    render() {
+    generateCardList() {
         const cardList = this.state.board;
-        const gameOverMessage = this.isGameOver() ? "You won!" : "";
-
-        let cards = cardList.map((c, i) => { 
+        return cardList.map((c, i) => { 
             if (c !== null) {
                 return (
                     <Card key={i}
@@ -441,6 +439,11 @@ class GameBoard extends React.Component {
                 );
             }
         });
+    }
+
+    render() {        
+        const gameOverMessage = this.isGameOver() ? "You won!" : "";
+        let cards = this.generateCardList();
 
         return (
             <div className="gameBoard">
