@@ -342,7 +342,7 @@ class GameBoard extends React.Component {
     }
 
     handleCardClick(index) {
-        const board = this.state.board;
+        let board = this.state.board;
 
         if (index >= 0 && index < board.length) {
             const isFound = board[index].isFound;
@@ -351,6 +351,11 @@ class GameBoard extends React.Component {
             console.log("eng: " + board[index].eng);
             console.log("kana: " + board[index].kana);
             if (isFound === false) {
+                board[index].isDisplayed = true;
+                this.setState({
+                    board: board
+                });
+
                 this.processCards(index);
             }
         }
@@ -398,6 +403,8 @@ class GameBoard extends React.Component {
                 board[cardTwoIndex].isFound = true;
                 alert("Match!");
             } else {
+                board[cardOneIndex].isDisplayed = false;
+                board[cardTwoIndex].isDisplayed = false;
                 missed++;
                 alert("Missed!");
             }
@@ -425,7 +432,7 @@ class GameBoard extends React.Component {
     generateCardList() {
         const cardList = this.state.board;
         return cardList.map((c, i) => { 
-            if (c !== null) {
+            if (c !== null && c.isDisplayed) {
                 return (
                     <Card key={i}
                         kana={c.kana}
@@ -435,7 +442,8 @@ class GameBoard extends React.Component {
                 );
             } else {
                 return (
-                    <Card key={i} />
+                    <Card key={i} 
+                        onCardClick={() => this.handleCardClick(i)}/>
                 );
             }
         });
@@ -507,8 +515,8 @@ function randomKanaSet(numberOfCards, kanaSet) {
                 colIndex = Math.floor(Math.random() * kanaSet[rowIndex].length);
             } while (kanaSet[rowIndex][colIndex] === null)
 
-            randomCards.push({ "kana": kanaSet[rowIndex][colIndex].hira, "eng": kanaSet[rowIndex][colIndex].eng, "isFound": false });
-            randomCards.push({ "kana": kanaSet[rowIndex][colIndex].kata, "eng": kanaSet[rowIndex][colIndex].eng, "isFound": false });
+            randomCards.push({ "kana": kanaSet[rowIndex][colIndex].hira, "eng": kanaSet[rowIndex][colIndex].eng, "isFound": false, "isDisplayed": false });
+            randomCards.push({ "kana": kanaSet[rowIndex][colIndex].kata, "eng": kanaSet[rowIndex][colIndex].eng, "isFound": false, "isDisplayed": false });
         }
     }
 
@@ -536,10 +544,9 @@ function shuffle(array) {
   }
 
 // TODO
-// Using the card list draw cards flipped face down
-// Play the concentration/memory card game to match hiragana and katakana (display a GameBoard with Card components)
-// Cards will begin as buttons which can be clicked to reveal their value and "flip" over during the matching attempt process
-// Redraw the cards when a new game starts.
+// Play the concentration/memory card game to match hiragana and katakana (display a GameBoard with Card components).
+// Cards can be clicked to reveal their value and "flip" over during the matching attempt process.
+// Redraw the cards when a new game starts. Draw the face value when a card flips.
 
 ReactDOM.render(
     <App />,
