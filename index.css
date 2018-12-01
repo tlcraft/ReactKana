@@ -12,6 +12,9 @@ div {
 
 .gameBoard {
   margin-bottom: 50px;
+  margin: auto;
+  max-width: 1100px;
+  background: lightgrey;
 }
 
 .card {

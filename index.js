@@ -277,7 +277,7 @@ const KANA = [
 function App (props) {
     return (
         <div>
-            <GameBoard kanaSet={KANA} numberOfCards="2" />
+            <GameBoard kanaSet={KANA} numberOfCards="20" />
             <KanaBoard message="Japanese Hiragana and Katakana Syllabaries" kanaSet={KANA} className="kanaBoard" />
             <KanaBoard message="Dakuon" kanaSet={DAKUON} className="kanaBoard" />
             <KanaBoard message="Han-Dakuon" kanaSet={HANDAKUON} className="kanaBoard" />
