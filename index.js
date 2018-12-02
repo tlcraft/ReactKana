@@ -1,4 +1,5 @@
 import React from 'react';
+import update from 'immutability-helper';
 import ReactDOM from 'react-dom';
 import './index.css';
 
@@ -307,8 +308,9 @@ class GameBoard extends React.Component {
 
     newGameClick() {
         const kanaSet = this.state.kanaSet;
+        const numOfCards = this.state.numberOfCards;
         this.setState({
-            board: randomKanaSet(this.state.numberOfCards, kanaSet),
+            board: randomKanaSet(numOfCards, kanaSet),
             cardOneIndex: -1,
             cardTwoIndex: -1,
             hasTwoCards: false,
@@ -321,8 +323,9 @@ class GameBoard extends React.Component {
 
     handleNumberOfCardsChange(event) {
         let newNumber = event.target.value;
-        if (newNumber > 47) {
-            newNumber = 47;
+        const totalNumOfCards = this.state.board.length;
+        if (newNumber > totalNumOfCards) {
+            newNumber = totalNumOfCards;
         }
         this.setState({numberOfCards: newNumber});
     }
@@ -347,14 +350,19 @@ class GameBoard extends React.Component {
         if (index >= 0 && index < board.length) {
             const isFound = board[index].isFound;
 
+            //TODO Remove the debug code
             console.log("clicked card. isFound: " + isFound);
             console.log("eng: " + board[index].eng);
             console.log("kana: " + board[index].kana);
+
             if (isFound === false) {
                 board[index].isDisplayed = true;
                 this.setState({
                     board: board
                 });
+                // this.setState({
+                //     board: update(this.state.board, {[index]: {isDisplayed: {$set: true}}})
+                // });
 
                 this.processCards(index);
             }
