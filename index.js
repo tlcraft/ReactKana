@@ -1,5 +1,4 @@
 import React from 'react';
-import update from 'immutability-helper';
 import ReactDOM from 'react-dom';
 import './index.css';
 
