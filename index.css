@@ -50,3 +50,8 @@ li {
 .numCards {
   margin: 15px;
 }
+
+.displayed {
+  background: white;
+  font-weight: bold;
+}

@@ -439,18 +439,18 @@ class GameBoard extends React.Component {
     generateCardList() {
         const cardList = this.state.board;
         return cardList.map((c, i) => { 
-            if (c !== null && c.isDisplayed) {
+            if (c !== null) {
+                const kana = c.isDisplayed ? c.kana : ' ';
+                const eng = c.isDisplayed ? c.eng : ' ';
+                const className = c.isDisplayed ? 'displayed ' : '';
+
                 return (
                     <Card key={i}
-                        kana={c.kana}
-                        pronunciation={c.eng}
+                        kana={kana}
+                        class={className}
+                        pronunciation={eng}
                         onCardClick={() => this.handleCardClick(i)}
                     />
-                );
-            } else {
-                return (
-                    <Card key={i} 
-                        onCardClick={() => this.handleCardClick(i)}/>
                 );
             }
         });
@@ -488,6 +488,7 @@ class Card extends React.Component {
             kana: props.kana,
             pronunciation: props.pronunciation,
             onCardClick: props.onCardClick,
+            class: props.class
         };
     }
 
@@ -495,7 +496,7 @@ class Card extends React.Component {
         return (
             <button
              onClick={() => this.state.onCardClick()}
-             className="card"
+             className={'card ' + this.state.class}
             >
                 {this.state.kana}
                 <br/>
