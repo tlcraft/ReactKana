@@ -24,22 +24,18 @@ function KanaBoard (props) {
 
 function KanaRow(props) {
     let kanaRow = props.kanaRow.map((k, i) => { 
-        if ( k !== null) {
-            return (
-                <Kana key={i}
-                hira={k.hira}
-                kata={k.kata}
-                pronunciation={k.eng}
-                className="kana"
-                />
-            );
-        } else {
-            return (
-                <Kana key={i}
-                className="kana"
-                />
-            );
-        }
+        const hira = k != null ? k.hira : '';
+        const kata = k != null ? k.kata : '';
+        const eng = k != null ? k.eng : '';
+
+        return (
+            <Kana key={i}
+            hira={hira}
+            kata={kata}
+            pronunciation={eng}
+            className="kana"
+            />
+        );
     });
 
     return (
@@ -359,6 +355,7 @@ class GameBoard extends React.Component {
                 this.setState({
                     board: board
                 });
+                //TODO Fix the UI so cards redraw appropriately
                 // this.setState({
                 //     board: update(this.state.board, {[index]: {isDisplayed: {$set: true}}})
                 // });
@@ -439,20 +436,20 @@ class GameBoard extends React.Component {
     generateCardList() {
         const cardList = this.state.board;
         return cardList.map((c, i) => { 
-            if (c !== null) {
-                const kana = c.isDisplayed ? c.kana : ' ';
-                const eng = c.isDisplayed ? c.eng : ' ';
-                const className = c.isDisplayed ? 'displayed ' : '';
+            const isCardDisplayed = c !== null && c.isDisplayed;
 
-                return (
-                    <Card key={i}
-                        kana={kana}
-                        class={className}
-                        pronunciation={eng}
-                        onCardClick={() => this.handleCardClick(i)}
-                    />
-                );
-            }
+            const kana = isCardDisplayed ? c.kana : ' ';
+            const eng = isCardDisplayed ? c.eng : ' ';
+            const className = isCardDisplayed ? 'displayed ' : '';
+
+            return (
+                <Card key={i}
+                    kana={kana}
+                    class={className}
+                    pronunciation={eng}
+                    onCardClick={() => this.handleCardClick(i)}
+                />
+            );
         });
     }
 
