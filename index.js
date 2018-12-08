@@ -294,7 +294,6 @@ class GameBoard extends React.Component {
             board: randomKanaSet(props.numberOfCards, props.kanaSet),
             cardOneIndex: -1,
             cardTwoIndex: -1,
-            hasTwoCards: false,
             missed: 0,
         };
 
@@ -308,7 +307,6 @@ class GameBoard extends React.Component {
             board: randomKanaSet(numOfCards, kanaSet),
             cardOneIndex: -1,
             cardTwoIndex: -1,
-            hasTwoCards: false,
             missed: 0,
         });
 
@@ -365,11 +363,12 @@ class GameBoard extends React.Component {
         }
     }
 
-    processCards(index) {
-        let hasTwoCards = this.state.hasTwoCards;
+    processCards(index) {        
         let cardOneIndex = this.state.cardOneIndex;
         let cardTwoIndex = this.state.cardTwoIndex;
-        let cardOne = null, cardTwo = null;
+        let hasTwoCards = cardOneIndex >= 0 && cardTwoIndex >= 0;
+        let cardOne = null;
+        let cardTwo = null;
         let missed = this.state.missed;
         let board = this.state.board;
         let canCompare;
@@ -383,6 +382,7 @@ class GameBoard extends React.Component {
         if ( cardOneIndex >= 0 ) {
             cardOne = board[cardOneIndex];
         }
+
         if ( cardTwoIndex >= 0 ) {
             cardTwo = board[cardTwoIndex];
         }
@@ -428,7 +428,6 @@ class GameBoard extends React.Component {
             board: board,
             cardOneIndex: cardOneIndex,
             cardTwoIndex: cardTwoIndex,
-            hasTwoCards: hasTwoCards,
             missed: missed,
         });
     }
