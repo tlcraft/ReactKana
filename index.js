@@ -309,9 +309,6 @@ class GameBoard extends React.Component {
             cardTwoIndex: -1,
             missed: 0,
         });
-
-        //TODO redraw the right cards on the screen
-        //this.forceUpdate();
     }
 
     handleNumberOfCardsChange(event) {
@@ -353,11 +350,6 @@ class GameBoard extends React.Component {
                 this.setState({
                     board: board
                 });
-                //TODO Fix the UI so cards redraw appropriately
-                // this.setState({
-                //     board: update(this.state.board, {[index]: {isDisplayed: {$set: true}}})
-                // });
-
                 this.processCards(index);
             }
         }
@@ -476,30 +468,22 @@ class GameBoard extends React.Component {
     }
 }
 
-class Card extends React.Component {
-    constructor(props) {
-        super(props);
+function Card (props) {
+    const kana = props.kana;
+    const pronunciation = props.pronunciation;
+    const onCardClick = props.onCardClick;
+    const className = props.class;
 
-        this.state = {
-            kana: props.kana,
-            pronunciation: props.pronunciation,
-            onCardClick: props.onCardClick,
-            class: props.class
-        };
-    }
-
-    render() {
-        return (
-            <button
-             onClick={() => this.state.onCardClick()}
-             className={'card ' + this.state.class}
-            >
-                {this.state.kana}
-                <br/>
-                {this.state.pronunciation}
-            </button>
-        );
-    }
+    return (
+        <button
+            onClick={() => onCardClick()}
+            className={'card ' + className}
+        >
+            {kana}
+            <br/>
+            {pronunciation}
+        </button>
+    );
 }
 
 function randomKanaSet(numberOfCards, kanaSet) {
