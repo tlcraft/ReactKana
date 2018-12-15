@@ -340,16 +340,12 @@ class GameBoard extends React.Component {
         if (index >= 0 && index < board.length) {
             const isFound = board[index].isFound;
 
-            //TODO Remove the debug code
-            console.log("clicked card. isFound: " + isFound);
-            console.log("eng: " + board[index].eng);
-            console.log("kana: " + board[index].kana);
-
             if (isFound === false) {
                 board[index].isDisplayed = true;
                 this.setState({
                     board: board
                 });
+                
                 this.processCards(index);
             }
         }
@@ -388,21 +384,20 @@ class GameBoard extends React.Component {
             hasTwoCards = true;
         } else {
             console.error("No free cards. Index: " + index);
+            return;
         }
 
         // Using type coercion to check for null and undefined with != instead of !==
         canCompare = (cardOne != null && cardOne.isFound === false) && (cardTwo != null && cardTwo.isFound === false) && cardOne.kana !== cardTwo.kana
-        console.log("Can Compare: " + canCompare + " hasTwoCards " + hasTwoCards);
+
         if ( canCompare && hasTwoCards) {
             if (cardOne.eng === cardTwo.eng) {
                 board[cardOneIndex].isFound = true;
                 board[cardTwoIndex].isFound = true;
-                alert("Match!");
             } else {
                 board[cardOneIndex].isDisplayed = false;
                 board[cardTwoIndex].isDisplayed = false;
                 missed++;
-                alert("Missed!");
             }
         } else {
             if (cardOne != null && cardOne.isFound === true) {
