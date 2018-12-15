@@ -429,8 +429,8 @@ class GameBoard extends React.Component {
         return cardList.map((c, i) => { 
             const isCardDisplayed = c !== null && c.isDisplayed;
 
-            const kana = isCardDisplayed ? c.kana : ' ';
-            const eng = isCardDisplayed ? c.eng : ' ';
+            const kana = isCardDisplayed ? c.kana : 'カナ';
+            const eng = isCardDisplayed ? c.eng : 'Kana';
             const className = isCardDisplayed ? 'displayed ' : '';
 
             return (
