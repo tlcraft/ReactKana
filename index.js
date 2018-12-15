@@ -346,7 +346,7 @@ class GameBoard extends React.Component {
                     board: board
                 });
                 
-                this.processCards(index);
+                setTimeout(function() { this.processCards(index) }.bind(this), 1000);
             }
         }
     }
@@ -524,18 +524,15 @@ function shuffle(array) {
     }
   
     return array;
-  }
-
-// TODO
-// Play the concentration/memory card game to match hiragana and katakana (display a GameBoard with Card components).
-// Cards can be clicked to reveal their value and "flip" over during the matching attempt process. Reveal both cards for several seconds if the match is wrong.
+}
 
 ReactDOM.render(
     <App />,
     document.getElementById('root')
-  );
+);
  
-  
+//TODO Don't allow more cards to be clicked until the selected two flip back over  
+
   /*
 
   Hiragana
