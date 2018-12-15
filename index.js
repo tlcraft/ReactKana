@@ -533,8 +533,7 @@ function shuffle(array) {
 
 // TODO
 // Play the concentration/memory card game to match hiragana and katakana (display a GameBoard with Card components).
-// Cards can be clicked to reveal their value and "flip" over during the matching attempt process.
-// Redraw the cards when a new game starts. Draw the face value when a card flips.
+// Cards can be clicked to reveal their value and "flip" over during the matching attempt process. Reveal both cards for several seconds if the match is wrong.
 
 ReactDOM.render(
     <App />,
