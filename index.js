@@ -295,6 +295,7 @@ class GameBoard extends React.Component {
             cardOneIndex: -1,
             cardTwoIndex: -1,
             missed: 0,
+            canClick: true
         };
 
         this.handleNumberOfCardsChange = this.handleNumberOfCardsChange.bind(this);
@@ -308,6 +309,7 @@ class GameBoard extends React.Component {
             cardOneIndex: -1,
             cardTwoIndex: -1,
             missed: 0,
+            canClick: true
         });
     }
 
@@ -336,17 +338,24 @@ class GameBoard extends React.Component {
 
     handleCardClick(index) {
         let board = this.state.board;
-
-        if (index >= 0 && index < board.length) {
+        const canClick = this.state.canClick;
+        
+        if (canClick && index >= 0 && index < board.length) {
             const isFound = board[index].isFound;
 
             if (isFound === false) {
                 board[index].isDisplayed = true;
                 this.setState({
-                    board: board
+                    board: board,
+                    canClick: false
                 });
                 
-                setTimeout(function() { this.processCards(index) }.bind(this), 1000);
+                setTimeout(function() { 
+                    this.processCards(index);
+                    this.setState({
+                        canClick: true
+                    });    
+                }.bind(this), 1000);
             }
         }
     }
@@ -415,7 +424,7 @@ class GameBoard extends React.Component {
             board: board,
             cardOneIndex: cardOneIndex,
             cardTwoIndex: cardTwoIndex,
-            missed: missed,
+            missed: missed
         });
     }
 
