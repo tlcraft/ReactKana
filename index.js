@@ -270,10 +270,10 @@ const KANA = [
     ],
   ]
 　
-function App (props) {
+function App () {
     return (
         <div>
-            <GameBoard kanaSet={KANA} numberOfCards="20" />
+            <GameBoard kanaSet={KANA} numberOfCards="7" />
             <KanaBoard message="Japanese Hiragana and Katakana Syllabaries" kanaSet={KANA} className="kanaBoard" />
             <KanaBoard message="Dakuon" kanaSet={DAKUON} className="kanaBoard" />
             <KanaBoard message="Han-Dakuon" kanaSet={HANDAKUON} className="kanaBoard" />
@@ -346,29 +346,21 @@ class GameBoard extends React.Component {
             if (isFound === false) {
                 board[index].isDisplayed = true;
                 this.setState({
-                    board: board,
-                    canClick: false
+                    board: board
                 });
                 
-                setTimeout(function() { 
-                    this.processCards(index);
-                    this.setState({
-                        canClick: true
-                    });    
-                }.bind(this), 1000);
+                this.canProcessCards(index);
             }
         }
     }
 
-    processCards(index) {        
+    canProcessCards(index) {
         let cardOneIndex = this.state.cardOneIndex;
         let cardTwoIndex = this.state.cardTwoIndex;
         let hasTwoCards = cardOneIndex >= 0 && cardTwoIndex >= 0;
         let cardOne = null;
         let cardTwo = null;
-        let missed = this.state.missed;
         let board = this.state.board;
-        let canCompare;
 
         if ( hasTwoCards ) {
             cardOneIndex = -1;
@@ -381,6 +373,7 @@ class GameBoard extends React.Component {
         }
 
         if ( cardTwoIndex >= 0 ) {
+            console.error("Should never reach this point. Index: " + cardTwoIndex);
             cardTwo = board[cardTwoIndex];
         }
 
@@ -396,10 +389,30 @@ class GameBoard extends React.Component {
             return;
         }
 
-        // Using type coercion to check for null and undefined with != instead of !==
-        canCompare = (cardOne != null && cardOne.isFound === false) && (cardTwo != null && cardTwo.isFound === false) && cardOne.kana !== cardTwo.kana
+        this.setState({
+            cardOneIndex: cardOneIndex,
+            cardTwoIndex: cardTwoIndex
+        });
 
-        if ( canCompare && hasTwoCards) {
+        if (hasTwoCards) {
+            this.setState({
+                canClick: false
+            }, () => {
+                this.processCards(cardOne, cardTwo);
+            });                            
+        }
+    }
+
+    processCards(cardOne, cardTwo) {  
+        let cardOneIndex = this.state.cardOneIndex;
+        let cardTwoIndex = this.state.cardTwoIndex;
+        let missed = this.state.missed;
+        let board = this.state.board;
+
+        // Using type coercion to check for null and undefined with != instead of !==
+        const canCompare = (cardOne != null && cardOne.isFound === false) && (cardTwo != null && cardTwo.isFound === false) && cardOne.kana !== cardTwo.kana
+
+        if (canCompare) {
             if (cardOne.eng === cardTwo.eng) {
                 board[cardOneIndex].isFound = true;
                 board[cardTwoIndex].isFound = true;
@@ -420,12 +433,14 @@ class GameBoard extends React.Component {
             }
         }
 
-        this.setState({
-            board: board,
-            cardOneIndex: cardOneIndex,
-            cardTwoIndex: cardTwoIndex,
-            missed: missed
-        });
+        setTimeout(function() {
+            this.setState({
+                board: board,
+                cardOneIndex: cardOneIndex,
+                cardTwoIndex: cardTwoIndex,
+                missed: missed,
+                canClick: true
+        })}.bind(this), 1000);
     }
 
     generateCardList() {
@@ -539,8 +554,6 @@ ReactDOM.render(
     <App />,
     document.getElementById('root')
 );
- 
-//TODO Don't allow more cards to be clicked until the selected two flip back over  
 
   /*
 
