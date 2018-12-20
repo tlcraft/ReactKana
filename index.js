@@ -413,7 +413,8 @@ class GameBoard extends React.Component {
         const canCompare = (cardOne != null && cardOne.isFound === false) && (cardTwo != null && cardTwo.isFound === false) && cardOne.kana !== cardTwo.kana
 
         if (canCompare) {
-            if (cardOne.eng === cardTwo.eng) {
+            if (cardOne.eng === cardTwo.eng
+                && cardOne.kana !== cardTwo.kana) {
                 board[cardOneIndex].isFound = true;
                 board[cardTwoIndex].isFound = true;
             } else {
@@ -465,7 +466,7 @@ class GameBoard extends React.Component {
 
     render() {        
         const gameOverMessage = this.isGameOver() ? "You won!" : "";
-        let cards = this.generateCardList();
+        const cards = this.generateCardList();
 
         return (
             <div className="gameBoard">
@@ -507,11 +508,12 @@ function Card (props) {
 
 function randomKanaSet(numberOfCards, kanaSet) {
     let randomCards = [];
+    let usedKana = [];
     let rowIndex = 0;
     let colIndex = 0;
 
     if (kanaSet != null && kanaSet.length > 0) {
-        let totalSet = kanaSet.length * kanaSet[0].length;
+        const totalSet = kanaSet.length * kanaSet[0].length;
         if ( numberOfCards <= 0 || numberOfCards > totalSet ) {
             numberOfCards = Math.ceil(totalSet / 4);
         }       
@@ -520,8 +522,9 @@ function randomKanaSet(numberOfCards, kanaSet) {
             do {            
                 rowIndex = Math.floor(Math.random() * kanaSet.length);
                 colIndex = Math.floor(Math.random() * kanaSet[rowIndex].length);
-            } while (kanaSet[rowIndex][colIndex] === null)
+            } while (kanaSet[rowIndex][colIndex] === null || usedKana.includes({rowIndex, colIndex}) === true)
 
+            usedKana.push({rowIndex, colIndex});
             randomCards.push({ "kana": kanaSet[rowIndex][colIndex].hira, "eng": kanaSet[rowIndex][colIndex].eng, "isFound": false, "isDisplayed": false });
             randomCards.push({ "kana": kanaSet[rowIndex][colIndex].kata, "eng": kanaSet[rowIndex][colIndex].eng, "isFound": false, "isDisplayed": false });
         }
@@ -532,7 +535,7 @@ function randomKanaSet(numberOfCards, kanaSet) {
 
 //Source: https://stackoverflow.com/a/2450976/8094831
 function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+    let currentIndex = array.length, temporaryValue, randomIndex;
   
     // While there remain elements to shuffle...
     while (0 !== currentIndex) {
