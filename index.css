@@ -3,10 +3,8 @@ body {
   max-width: 1700px;
   margin: auto;
 }
- 
+
 div {
-  margin: 0;
-  padding: 0;
   font-family: sans-serif;
 }
 
@@ -30,19 +28,12 @@ div {
 
 .container {
   margin-right: 50px;
-}
-
-div.kanaRow {
-  float: right;
-}
-
-div.kanaBoard {
-  overflow: hidden;
+  display: flex;
 }
 
 li {
   list-style: none;
-  border: 1px solid; 
+  border: 1px solid black;
   padding: 40px;
   margin: 1px;
   width: 40px;
